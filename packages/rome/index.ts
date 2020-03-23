@@ -18,6 +18,7 @@ import {ConstSourceType} from '@romejs/js-ast';
 import {findProject} from './project';
 import {throwDiagnostics, wrapForErrors} from './error';
 import {getFileHandlerAssert} from '@romejs/core/common/fileHandlers';
+import { testLint } from '@romejs/js-compiler/api/lint.test';
 
 export {RomeDiagnosticsError} from './error';
 
@@ -124,7 +125,4 @@ export const compile = wrapForErrors(async function(opts: {
   };
 });
 
-export function lint(filename: string, input: string) {
-  filename;
-  input;
-}
+export const lint = testLint;
