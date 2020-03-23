@@ -35,6 +35,36 @@ export {
 export {default as createHook} from './api/createHook';
 export {extractSuppressionsFromProgram} from './suppressions';
 
+import {parseJS} from '@romejs/js-parser';
+import {createUnknownFilePath} from '@romejs/path';
+import {DEFAULT_PROJECT_CONFIG} from '@romejs/project';
+import {ConstSourceType, ConstProgramSyntax} from '@romejs/js-ast';
+
+import lint from './api/lint';
+
+export async function testLint(
+  input: string,
+  format: boolean = false,
+  sourceType: ConstSourceType = 'module',
+  syntax?: Array<ConstProgramSyntax>,
+) {
+  return await lint({
+    options: {},
+    format,
+    ast: parseJS({
+      input,
+      sourceType,
+      path: createUnknownFilePath('unknown'),
+      syntax,
+    }),
+    sourceText: input,
+    project: {
+      folder: undefined,
+      config: DEFAULT_PROJECT_CONFIG,
+    },
+  });
+}
+
 // types
 export {LintResult} from './api/lint';
 export {CompileResult} from './api/compile';
