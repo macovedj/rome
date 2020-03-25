@@ -1,7 +1,6 @@
 {
 	"name": "rome",
 	"description": "An experimental javascript toolchain",
-	"author": "Kevin Kelbie",
 	"license": "MIT",
 	"version": "0.0.0",
 	"repository": {
