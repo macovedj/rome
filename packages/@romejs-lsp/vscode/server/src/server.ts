@@ -114,16 +114,16 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 	return result;
 }
 
-// Only keep settings for open documents
-documents.onDidClose(e => {
-	documentSettings.delete(e.document.uri);
-});
+// // Only keep settings for open documents
+// documents.onDidClose(e => {
+// 	documentSettings.delete(e.document.uri);
+// });
 
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
-documents.onDidChangeContent(change => {
-	validateTextDocument(change.document);
-});
+// // The content of a text document has changed. This event is emitted
+// // when the text document first opened or when its content has changed.
+// documents.onDidChangeContent(change => {
+// 	validateTextDocument(change.document);
+// });
 
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	let language;
@@ -163,65 +163,34 @@ connection.onDidChangeWatchedFiles(_change => {
 	connection.console.log('We received an file change event');
 });
 
-// This handler provides the initial list of the completion items.
-connection.onCompletion(
-	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-		// The pass parameter contains the position of the text document in
-		// which code complete got requested. For the example we ignore this
-		// info and always provide the same completion items.
-		return [
-			{
-				label: 'TypeScript',
-				kind: CompletionItemKind.Text,
-				data: 1
-			},
-			{
-				label: 'JavaScript',
-				kind: CompletionItemKind.Text,
-				data: 2
-			}
-		];
-	}
-);
-
-// This handler resolves additional information for the item selected in
-// the completion list.
-connection.onCompletionResolve(
-	(item: CompletionItem): CompletionItem => {
-		if (item.data === 1) {
-			item.detail = 'TypeScript details';
-			item.documentation = 'TypeScript documentation';
-		} else if (item.data === 2) {
-			item.detail = 'JavaScript details';
-			item.documentation = 'JavaScript documentation';
-		}
-		return item;
-	}
-);
-
-/*
-connection.onDidOpenTextDocument((params) => {
-	// A text document got opened in VSCode.
-	// params.textDocument.uri uniquely identifies the document. For documents store on disk this is a file URI.
-	// params.textDocument.text the initial full content of the document.
-	connection.console.log(`${params.textDocument.uri} opened.`);
-});
-connection.onDidChangeTextDocument((params) => {
-	// The content of a text document did change in VSCode.
-	// params.textDocument.uri uniquely identifies the document.
-	// params.contentChanges describe the content changes to the document.
-	connection.console.log(`${params.textDocument.uri} changed: ${JSON.stringify(params.contentChanges)}`);
-});
-connection.onDidCloseTextDocument((params) => {
-	// A text document got closed in VSCode.
-	// params.textDocument.uri uniquely identifies the document.
-	connection.console.log(`${params.textDocument.uri} closed.`);
-});
-*/
-
 // Make the text document manager listen on the connection
 // for open, change and close text document events
 documents.listen(connection);
 
+
 // Listen on the connection
 connection.listen();
+
+
+connection.onDidOpenTextDocument((params) => {
+	// A text document got opened in VSCode.
+	// params.textDocument.uri uniquely identifies the document. For documents store on disk this is a file URI.
+	// params.textDocument.text the initial full content of the document.
+	console.log(`${params.textDocument.uri} opened.`);
+});
+
+connection.onDidChangeTextDocument((params) => {
+	// The content of a text document did change in VSCode.
+	// params.textDocument.uri uniquely identifies the document.
+	// params.contentChanges describe the content changes to the document.
+	const textDocument = TextDocument.create(params.textDocument.uri, 'js', params.textDocument.version as number, params.contentChanges[0].text)
+	
+	validateTextDocument(textDocument);
+	console.log(JSON.stringify(params));
+});
+
+connection.onDidCloseTextDocument((params) => {
+	// A text document got closed in VSCode.
+	// params.textDocument.uri uniquely identifies the document.
+	console.log(`${params.textDocument.uri} closed.`);
+});

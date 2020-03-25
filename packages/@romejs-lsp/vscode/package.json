@@ -1,5 +1,5 @@
 {
-	"name": "@romejs-vscode",
+	"name": "rome",
 	"description": "An experimental javascript toolchain",
 	"author": "Kevin Kelbie",
 	"license": "MIT",
