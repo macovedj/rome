@@ -10,9 +10,6 @@ class ExampleLanguageClient extends AutoLanguageClient {
   startServerProcess () {
     const path = `${__dirname.replace("atom/lib", "")}vscode/server/out/server.js`;
     const startServer = require.resolve(path);
-    console.log(super.spawnChildNode([startServer, '--node-ipc'], {
-      stdio: [null, null, null, 'ipc']
-    }))
     return super.spawnChildNode([startServer, '--node-ipc'], {
       stdio: [null, null, null, 'ipc']
     })
