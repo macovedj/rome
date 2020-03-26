@@ -1,9 +1,15 @@
 {
-	"name": "lsp-sample-server",
-	"description": "Example implementation of a language server in node.",
-	"version": "1.0.0",
-	"author": "Microsoft Corporation",
+	"name": "rome-vscode-server",
+	"type": "module",
+	"main": "src/server.ts",
+	"version": "0.0.0",
 	"license": "MIT",
+	"files": [
+		"LICENSE"
+	],
+	"bin": {
+		"rome": "bin/rome.ts"
+	},
 	"engines": {
 		"node": "*"
 	},

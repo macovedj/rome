@@ -1,9 +1,8 @@
 {
-  "name": "ide-csharp",
+  "name": "rome-atom",
   "main": "./lib/main",
   "version": "0.6.2",
-  "description": "C# language support for Atom-IDE.",
-  "repository": "https://github.com/atom/ide-csharp",
+  "description": "An experimental javascript toolchain.",
   "license": "MIT",
   "engines": {
     "atom": ">=1.21.0"
