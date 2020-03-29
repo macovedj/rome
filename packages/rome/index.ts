@@ -18,8 +18,12 @@ import {ConstSourceType} from '@romejs/js-ast';
 import {findProject} from './project';
 import {throwDiagnostics, wrapForErrors} from './error';
 import {getFileHandlerAssert} from '@romejs/core/common/fileHandlers';
+import {testLint} from '@romejs/js-compiler/api/lint.test';
+import {GlobalTestOptions} from '@romejs/test';
 
 export {RomeDiagnosticsError} from './error';
+
+declare const __ROME__TEST_OPTIONS__: GlobalTestOptions;
 
 //
 const cacheKeyPartsCache: AbsoluteFilePathMap<string> = new AbsoluteFilePathMap();
@@ -124,7 +128,4 @@ export const compile = wrapForErrors(async function(
   };
 });
 
-export function lint(filename: string, input: string) {
-  filename;
-  input;
-}
+export const lint = testLint;

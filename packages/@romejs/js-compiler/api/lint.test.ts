@@ -9,7 +9,7 @@
 
 // after all open linting PRs have been merged.
 
-import test from '@romejs/test';
+// import test from '@romejs/test';
 import lint from './lint';
 import {parseJS} from '@romejs/js-parser';
 import {createUnknownFilePath} from '@romejs/path';
@@ -39,19 +39,30 @@ export async function testLint(
   });
 }
 
-test('format disabled in project config should not regenerate the file', async (
-  t,
-) => {
-  // Intentionally weird formatting
-  const sourceText = 'foobar ( "yes" );';
-  const res = await testLint(sourceText, false);
-  t.is(res.src, sourceText);
-});
+// test('format disabled in project config should not regenerate the file', async (
 
-test(
-  'format enabled in project config should result in regenerated file',
-  async (t) => {
-    const res = await testLint('foobar ( "yes" );', true);
-    t.is(res.src, 'foobar(\'yes\');\n');
-  },
-);
+//   t,
+
+// ) => {
+//   // Intentionally weird formatting
+
+//   const sourceText = 'foobar ( "yes" );';
+
+//   const res = await testLint(sourceText, false);
+
+//   t.is(res.src, sourceText);
+
+// });
+
+// test(
+
+//   'format enabled in project config should result in regenerated file',
+
+//   async (t) => {
+//     const res = await testLint('foobar ( "yes" );', true);
+
+//     t.is(res.src, 'foobar(\'yes\');\n');
+
+//   },
+
+// );

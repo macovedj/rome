@@ -1,0 +1,24 @@
+{
+	"name": "rome-vscode-server",
+	"type": "module",
+	"main": "src/server.ts",
+	"version": "0.0.0",
+	"license": "MIT",
+	"files": [
+		"LICENSE"
+	],
+	"bin": {
+		"rome": "bin/rome.ts"
+	},
+	"engines": {
+		"node": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Microsoft/vscode-extension-samples"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^5.2.1"
+	},
+	"scripts": {}
+}
