@@ -14,15 +14,22 @@ import duplicateImportSource from './regular/duplicateImportSource';
 import emptyBlocks from './regular/emptyBlocks';
 import emptyMatches from './regular/emptyMatches';
 import getterReturn from './regular/getterReturn';
+import importDefaultBasename from './regular/importDefaultBasename';
 import inconsiderateLanguage from './regular/inconsiderateLanguage';
+import jsxA11YImgRedundantAlt from './react/jsxA11yImgRedundantAlt';
+import jsxA11YIframeHasTitle from './react/jsxA11yIframeHasTitle';
+import jsxA11YHTMLHasLang from './react/jsxA11yHTMLHasLang';
 import jsxKey from './react/jsxKey';
 import jsxNoCommentText from './react/jsxNoCommentText';
+import negationElse from './regular/negationElse';
 import noArguments from './regular/noArguments';
 import noAsyncPromiseExecutor from './regular/noAsyncPromiseExecutor';
 import noCatchAssign from './regular/noCatchAssign';
 import noChildrenProp from './react/noChildrenProp';
+import noCommaOperator from './regular/noCommaOperator';
 import noCompareNegZero from './regular/noCompareNegZero';
 import noCondAssign from './regular/noCondAssign';
+import noDangerWithChildren from './react/noDangerWithChildren';
 import noDebugger from './regular/noDebugger';
 import noDelete from './regular/noDelete';
 import noDeleteVars from './regular/noDeleteVars';
@@ -33,6 +40,7 @@ import noDuplicateKeys from './regular/noDuplicateKeys';
 import noEmptyCharacterClass from './regular/noEmptyCharacterClass';
 import noExplicitAny from './regular/noExplicitAny';
 import noExtraBooleanCast from './regular/noExtraBooleanCast';
+import noFindDOMNode from './react/noFindDOMNode';
 import noFunctionAssign from './regular/noFunctionAssign';
 import noImportAssign from './regular/noImportAssign';
 import noLabelVar from './regular/noLabelVar';
@@ -49,6 +57,7 @@ import preferBlockStatements from './regular/preferBlockStatements';
 import preferFunctionDeclarations from './regular/preferFunctionDeclarations';
 import preferTemplate from './regular/preferTemplate';
 import preferWhile from './regular/preferWhile';
+import reactInJsxScope from './react/reactInJsxScope';
 import restrictedGlobals from './regular/restrictedGlobals';
 import singleVarDeclarator from './regular/singleVarDeclarator';
 import sortImportExportSpecifiers from './regular/sortImportExportSpecifiers';
@@ -57,6 +66,7 @@ import stylePropObject from './react/stylePropObject';
 import undeclaredVariables from './regular/undeclaredVariables';
 import unsafeNegation from './regular/unsafeNegation';
 import unusedVariables from './regular/unusedVariables';
+import voidDomElementsNoChildren from './react/voidDomElementsNoChildren';
 
 export const lintTransforms = [
   camelCase,
@@ -67,15 +77,22 @@ export const lintTransforms = [
   emptyBlocks,
   emptyMatches,
   getterReturn,
+  importDefaultBasename,
   inconsiderateLanguage,
+  jsxA11YImgRedundantAlt,
+  jsxA11YIframeHasTitle,
+  jsxA11YHTMLHasLang,
   jsxKey,
   jsxNoCommentText,
+  negationElse,
   noArguments,
   noAsyncPromiseExecutor,
   noCatchAssign,
   noChildrenProp,
+  noCommaOperator,
   noCompareNegZero,
   noCondAssign,
+  noDangerWithChildren,
   noDebugger,
   noDelete,
   noDeleteVars,
@@ -86,6 +103,7 @@ export const lintTransforms = [
   noEmptyCharacterClass,
   noExplicitAny,
   noExtraBooleanCast,
+  noFindDOMNode,
   noFunctionAssign,
   noImportAssign,
   noLabelVar,
@@ -102,6 +120,7 @@ export const lintTransforms = [
   preferFunctionDeclarations,
   preferTemplate,
   preferWhile,
+  reactInJsxScope,
   restrictedGlobals,
   singleVarDeclarator,
   sortImportExportSpecifiers,
@@ -110,4 +129,5 @@ export const lintTransforms = [
   undeclaredVariables,
   unsafeNegation,
   unusedVariables,
+  voidDomElementsNoChildren,
 ];

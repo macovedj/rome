@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Unknown class property start'}
       }
@@ -194,7 +195,6 @@ Program {
               generator: false
               hasHoistedVars: false
               params: Array []
-              predicate: undefined
               rest: undefined
               returnType: undefined
               thisType: undefined

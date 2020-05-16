@@ -49,6 +49,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Legacy octal literals are not allowed in strict mode'}
       }
@@ -106,7 +107,6 @@ Program {
         generator: false
         hasHoistedVars: false
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined
@@ -196,7 +196,6 @@ Program {
         generator: false
         hasHoistedVars: true
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined

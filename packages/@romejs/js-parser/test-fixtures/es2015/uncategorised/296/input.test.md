@@ -49,6 +49,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'eval is a reserved word'}
       }
@@ -118,7 +119,6 @@ Program {
         head: FunctionHead {
           async: false
           hasHoistedVars: false
-          predicate: undefined
           rest: undefined
           returnType: undefined
           thisType: undefined

@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'new.target can only be used in functions or class properties'}
       }
@@ -132,7 +133,6 @@ Program {
                 async: false
                 hasHoistedVars: false
                 params: Array []
-                predicate: undefined
                 rest: undefined
                 returnType: undefined
                 thisType: undefined

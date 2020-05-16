@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Unexpected keyword false'}
       }
@@ -105,7 +106,6 @@ Program {
         async: false
         generator: false
         hasHoistedVars: false
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined

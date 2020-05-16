@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Expected an identifier'}
       }
@@ -135,7 +136,6 @@ Program {
                         }
                       }
                     }
-                    variance: undefined
                     loc: Object {
                       filename: 'input.js'
                       end: Object {
@@ -312,7 +312,6 @@ Program {
                     }
                   }
                 }
-                variance: undefined
                 loc: Object {
                   filename: 'input.js'
                   end: Object {

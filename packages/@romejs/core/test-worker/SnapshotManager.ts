@@ -14,9 +14,10 @@ import {exists, readFileText, unlink, writeFile} from '@romejs/fs';
 import {TestMasterRunnerOptions} from '../master/testing/types';
 import TestWorkerRunner from './TestWorkerRunner';
 import {DiagnosticDescription, descriptions} from '@romejs/diagnostics';
-import createSnapshotParser from './SnapshotParser';
+import {createSnapshotParser} from './SnapshotParser';
 import {ErrorFrame} from '@romejs/v8';
 import {Number0, Number1} from '@romejs/ob1';
+import prettyFormat from '@romejs/pretty-format';
 
 function cleanHeading(key: string): string {
   if (key[0] === '`') {
@@ -53,7 +54,7 @@ function buildEntriesKey(testName: string, entryName: string): string {
 export type InlineSnapshotUpdate = {
   line: Number1;
   column: Number0;
-  snapshot: string;
+  snapshot: boolean | number | string | null | undefined;
 };
 
 export type InlineSnapshotUpdates = Array<InlineSnapshotUpdate>;
@@ -265,7 +266,7 @@ export default class SnapshotManager {
 
   async save() {
     // If there'a s focused test then we don't write or validate a snapshot
-    if (this.runner.hasFocusedTest) {
+    if (this.runner.hasFocusedTests) {
       return;
     }
 
@@ -276,12 +277,14 @@ export default class SnapshotManager {
       const formatted = lines.join('\n');
 
       if (this.options.freezeSnapshots) {
-        if (!used) {
+        if (used) {
+          if (formatted !== raw) {
+            await this.emitDiagnostic(
+              descriptions.SNAPSHOTS.INCORRECT(raw, formatted),
+            );
+          }
+        } else {
           await this.emitDiagnostic(descriptions.SNAPSHOTS.REDUNDANT);
-        } else if (formatted !== raw) {
-          await this.emitDiagnostic(
-            descriptions.SNAPSHOTS.INCORRECT(raw, formatted),
-          );
         }
       } else {
         if (existsOnDisk && !used) {
@@ -306,15 +309,26 @@ export default class SnapshotManager {
 
   testInlineSnapshot(
     callFrame: ErrorFrame,
-    received: string,
-    snapshot?: string,
-  ): 'MATCH' | 'NO_MATCH' | 'UPDATE' {
-    // Matches, no need to do anything
-    if (received === snapshot) {
-      return 'MATCH';
+    received: unknown,
+    expected?: InlineSnapshotUpdate['snapshot'],
+  ): {
+    status: 'MATCH' | 'NO_MATCH' | 'UPDATE';
+  } {
+    let receivedFormat = prettyFormat(received);
+
+    let expectedFormat;
+    if (typeof expected === 'string') {
+      expectedFormat = expected;
+    } else {
+      expectedFormat = prettyFormat(expected);
     }
 
-    const shouldSave = this.options.updateSnapshots || snapshot === undefined;
+    // Matches, no need to do anything
+    if (receivedFormat === expectedFormat) {
+      return {status: 'MATCH'};
+    }
+
+    const shouldSave = this.options.updateSnapshots || expected === undefined;
     if (shouldSave) {
       const {lineNumber, columnNumber} = callFrame;
       if (lineNumber === undefined || columnNumber === undefined) {
@@ -322,17 +336,28 @@ export default class SnapshotManager {
       }
 
       if (!this.options.freezeSnapshots) {
+        let snapshot: InlineSnapshotUpdate['snapshot'] = receivedFormat;
+        if (
+          typeof received === 'string' ||
+          typeof received === 'number' ||
+          typeof received === 'boolean' ||
+          received === undefined ||
+          received === null
+        ) {
+          snapshot = received;
+        }
+
         this.inlineSnapshotsUpdates.push({
           line: lineNumber,
           column: columnNumber,
-          snapshot: received,
+          snapshot,
         });
       }
 
-      return 'UPDATE';
+      return {status: 'UPDATE'};
     }
 
-    return 'NO_MATCH';
+    return {status: 'NO_MATCH'};
   }
 
   async get(

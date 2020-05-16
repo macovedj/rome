@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Invalid left-hand side in for-in statement'}
       }
@@ -89,7 +90,6 @@ Program {
         generator: true
         hasHoistedVars: false
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined

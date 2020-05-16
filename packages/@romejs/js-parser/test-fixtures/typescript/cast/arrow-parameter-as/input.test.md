@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Unexpected type cast in parameter position'}
       }
@@ -101,7 +102,6 @@ Program {
         head: FunctionHead {
           async: false
           hasHoistedVars: false
-          predicate: undefined
           rest: undefined
           returnType: undefined
           thisType: undefined

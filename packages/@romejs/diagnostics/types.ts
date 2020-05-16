@@ -60,9 +60,14 @@ export type DiagnosticLanguage = 'json' | 'js' | 'url' | 'shell' | 'unknown';
 
 export type DiagnosticSourceType = 'unknown' | ConstSourceType;
 
+export type DiagnosticsMeta = {
+  identifierName?: string;
+};
+
 export type Diagnostic = {
   description: DiagnosticDescription;
   location: DiagnosticLocation;
+  unique?: boolean;
   fixable?: boolean;
   label?: string;
   origins?: Array<DiagnosticOrigin>;
@@ -70,6 +75,7 @@ export type Diagnostic = {
     filename: string;
     mtime: number;
   }>;
+  meta?: DiagnosticsMeta;
 };
 
 export type Diagnostics = Array<Diagnostic>;
@@ -77,7 +83,7 @@ export type Diagnostics = Array<Diagnostic>;
 export type DiagnosticDescription = {
   category: DiagnosticCategory;
   message: DiagnosticBlessedMessage;
-  advice?: DiagnosticAdvice;
+  advice: DiagnosticAdvice;
 };
 
 export type DiagnosticDescriptionOptionalCategory = {

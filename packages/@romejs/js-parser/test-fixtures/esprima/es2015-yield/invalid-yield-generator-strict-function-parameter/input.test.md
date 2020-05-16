@@ -49,6 +49,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'yield is a reserved word'}
       }
@@ -106,7 +107,6 @@ Program {
         generator: true
         hasHoistedVars: true
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined
@@ -238,7 +238,6 @@ Program {
                       async: false
                       generator: false
                       hasHoistedVars: false
-                      predicate: undefined
                       rest: undefined
                       returnType: undefined
                       thisType: undefined

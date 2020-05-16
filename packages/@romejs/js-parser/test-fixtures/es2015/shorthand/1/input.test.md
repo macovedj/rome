@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Unexpected keyword const'}
       }
@@ -148,7 +149,6 @@ Program {
                         }
                       }
                     }
-                    variance: undefined
                     loc: Object {
                       filename: 'input.js'
                       end: Object {

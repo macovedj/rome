@@ -18,10 +18,10 @@ import {
   DiagnosticAdviceList,
   DiagnosticAdviceLog,
   DiagnosticAdviceStacktrace,
-  getDiagnosticHeader,
+  diagnosticLocationToMarkupFilelink,
 } from '@romejs/diagnostics';
 import {Position} from '@romejs/parser-core';
-import {showInvisibles, toLines} from './utils';
+import {ToLines, showInvisibles, toLines} from './utils';
 import buildPatchCodeFrame from './buildPatchCodeFrame';
 import buildMessageCodeFrame from './buildMessageCodeFrame';
 import {escapeMarkup, markupTag} from '@romejs/string-markup';
@@ -289,7 +289,11 @@ function printFrame(
     cleanMarker = markupTag('emphasis', cleanMessage(marker));
   }
 
-  let lines: Array<string> = [];
+  let lines: ToLines = {
+    length: 0,
+    raw: [],
+    highlighted: [],
+  };
   if (sourceText !== undefined) {
     lines = toLines({
       path,
@@ -307,7 +311,11 @@ function printFrame(
     path.isAbsolute() &&
     opts.missingFileSources.has(path.assertAbsolute())
   ) {
-    lines = ['<dim>File does not exist</dim>'];
+    lines = {
+      length: 1,
+      raw: ['File does not exist'],
+      highlighted: ['<dim>File does not exist</dim>'],
+    };
   }
 
   if (sourceText === undefined) {
@@ -338,9 +346,7 @@ function printStacktrace(
 
   let shownCodeFrames = 0;
 
-  const isFirstPart =
-    diagnostic.description.advice !== undefined &&
-    diagnostic.description.advice[0] === item;
+  const isFirstPart = diagnostic.description.advice[0] === item;
   if (!isFirstPart) {
     const {title} = item;
     if (title !== undefined) {
@@ -351,7 +357,7 @@ function printStacktrace(
 
   opts.reporter.processedList(
     frames,
-    (frame, display) => {
+    (reporter, frame) => {
       const {
         filename,
         object,
@@ -390,7 +396,7 @@ function printStacktrace(
 
       // Add source
       if (filename !== undefined && line !== undefined && column !== undefined) {
-        const header = getDiagnosticHeader({
+        const header = diagnosticLocationToMarkupFilelink({
           filename,
           start: {
             index: ob1Number0Neg1,
@@ -406,9 +412,8 @@ function printStacktrace(
         }
       }
 
-      display(logParts.join(' '));
+      reporter.logAll(logParts.join(' '));
 
-      // Push on frame
       if (
         shownCodeFrames < 2 &&
         filename !== undefined &&
@@ -433,17 +438,19 @@ function printStacktrace(
               sourceText: code,
             },
           },
-          opts,
+          {
+            ...opts,
+            reporter,
+          },
         );
         if (!skipped) {
-          opts.reporter.br(true);
+          reporter.br(true);
           shownCodeFrames++;
         }
       }
     },
     {
       ordered: true,
-      reverse: true,
       truncate: opts.flags.verboseDiagnostics ? undefined : 20,
     },
   );

@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'Can not use \'await\' as identifier inside an async function'}
       }
@@ -89,7 +90,6 @@ Program {
         generator: false
         hasHoistedVars: false
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined
@@ -177,7 +177,6 @@ Program {
               generator: false
               hasHoistedVars: false
               params: Array []
-              predicate: undefined
               rest: undefined
               returnType: undefined
               thisType: undefined

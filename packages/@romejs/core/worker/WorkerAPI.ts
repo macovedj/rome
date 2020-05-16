@@ -6,7 +6,7 @@
  */
 
 import {FileReference, Worker} from '@romejs/core';
-import {AnyNode, Program, stringLiteral} from '@romejs/js-ast';
+import {AnyNode, Program} from '@romejs/js-ast';
 import {Diagnostics, catchDiagnostics, descriptions} from '@romejs/diagnostics';
 import {
   CompileResult,
@@ -25,10 +25,8 @@ import {
 } from '../common/bridges/WorkerBridge';
 import Logger from '../common/utils/Logger';
 import * as jsAnalysis from '@romejs/js-analysis';
-import {
-  ExtensionLintResult,
-  getFileHandlerAssert,
-} from '../common/fileHandlers';
+import {ExtensionLintResult} from '../common/file-handlers/types';
+import {getFileHandlerAssert} from '../common/file-handlers/index';
 import {
   AnalyzeDependencyResult,
   UNKNOWN_ANALYZE_DEPENDENCIES_RESULT,
@@ -38,7 +36,7 @@ import {
   InlineSnapshotUpdates,
 } from '../test-worker/SnapshotManager';
 import {formatJS} from '@romejs/js-formatter';
-import {getNodeReferenceParts} from '@romejs/js-ast-utils';
+import {getNodeReferenceParts, valueToNode} from '@romejs/js-ast-utils';
 
 // Some Windows git repos will automatically convert Unix line endings to Windows
 // This retains the line endings for the formatted code if they were present in the source
@@ -67,14 +65,12 @@ export default class WorkerAPI {
   }>(val: T, generated: boolean): T {
     if (generated) {
       const diagnostics = val.diagnostics.map((diag) => {
-        const diagAdvice =
-          diag.description.advice === undefined ? [] : diag.description.advice;
         return {
           ...diag,
           metadata: {
             ...diag.description,
             advice: [
-              ...diagAdvice,
+              ...diag.description.advice,
               {
                 type: 'log',
                 category: 'warn',
@@ -177,10 +173,7 @@ export default class WorkerAPI {
 
             return {
               ...node,
-              arguments: [
-                args[0],
-                stringLiteral.create({value: matchedUpdate.snapshot}),
-              ],
+              arguments: [args[0], valueToNode(matchedUpdate.snapshot)],
             };
           }
 

@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'setter function argument must not be a rest parameter'}
       }
@@ -134,7 +135,6 @@ Program {
                     }
                   }
                 }
-                variance: undefined
                 loc: Object {
                   filename: 'input.js'
                   end: Object {
@@ -184,7 +184,6 @@ Program {
                 generator: false
                 hasHoistedVars: false
                 params: Array []
-                predicate: undefined
                 returnType: undefined
                 thisType: undefined
                 typeParameters: undefined

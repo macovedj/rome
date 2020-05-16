@@ -27,11 +27,10 @@ import {
   markup,
   markupToPlainTextString,
 } from '@romejs/string-markup';
-import {toLines} from './utils';
+import {ToLines, toLines} from './utils';
 import printAdvice from './printAdvice';
-
-import successBanner from './banners/success.json';
-import errorBanner from './banners/error.json';
+import {default as successBanner} from './banners/success.json';
+import {default as errorBanner} from './banners/error.json';
 import {
   AbsoluteFilePath,
   AbsoluteFilePathSet,
@@ -117,7 +116,7 @@ type FileDependency = ChangeFileDependency | ReferenceFileDependency;
 
 export type DiagnosticsPrinterFileSources = UnknownFilePathMap<{
   sourceText: string;
-  lines: Array<string>;
+  lines: ToLines;
 }>;
 
 export type DiagnosticsPrinterFileMtimes = UnknownFilePathMap<number>;
@@ -280,22 +279,20 @@ export default class DiagnosticsPrinter extends Error {
         }
       }
 
-      if (advice !== undefined) {
-        for (const item of advice) {
-          if (item.type === 'frame') {
-            const {location} = item;
-            if (
-              location.filename !== undefined &&
-              location.sourceText === undefined
-            ) {
-              deps.push({
-                type: 'reference',
-                path: this.createFilePath(location.filename),
-                language: location.language,
-                sourceType: location.sourceType,
-                mtime: location.mtime,
-              });
-            }
+      for (const item of advice) {
+        if (item.type === 'frame') {
+          const {location} = item;
+          if (
+            location.filename !== undefined &&
+            location.sourceText === undefined
+          ) {
+            deps.push({
+              type: 'reference',
+              path: this.createFilePath(location.filename),
+              language: location.language,
+              sourceType: location.sourceType,
+              mtime: location.mtime,
+            });
           }
         }
       }
@@ -384,7 +381,7 @@ export default class DiagnosticsPrinter extends Error {
   displayDiagnostic(diag: Diagnostic) {
     const {reporter} = this;
     const {start, end, filename} = diag.location;
-    let advice = [...(diag.description.advice || [])];
+    let advice = [...diag.description.advice];
 
     // Remove stacktrace from beginning if it contains only one frame that matches the root diagnostic location
     const firstAdvice = advice[0];

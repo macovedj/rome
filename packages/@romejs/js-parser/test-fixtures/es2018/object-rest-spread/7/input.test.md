@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: 'The rest element has to be the last element when destructuring'}
       }
@@ -135,7 +136,6 @@ Program {
                         }
                       }
                     }
-                    variance: undefined
                     loc: Object {
                       filename: 'input.js'
                       end: Object {
@@ -200,7 +200,6 @@ Program {
                         }
                       }
                     }
-                    variance: undefined
                     loc: Object {
                       filename: 'input.js'
                       end: Object {

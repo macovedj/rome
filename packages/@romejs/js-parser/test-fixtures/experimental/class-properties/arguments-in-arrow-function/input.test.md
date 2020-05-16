@@ -32,6 +32,7 @@ Program {
     Object {
       origins: Array [Object {category: 'js-parser'}]
       description: Object {
+        advice: Array []
         category: 'parse/js'
         message: PARTIAL_BLESSED_DIAGNOSTIC_MESSAGE {value: '\'arguments\' is not allowed in class field initializer'}
       }
@@ -89,7 +90,6 @@ Program {
         generator: false
         hasHoistedVars: false
         params: Array []
-        predicate: undefined
         rest: undefined
         returnType: undefined
         thisType: undefined
@@ -193,7 +193,6 @@ Program {
                         }
                       }
                     }
-                    variance: undefined
                     loc: Object {
                       filename: 'input.js'
                       end: Object {
@@ -243,7 +242,6 @@ Program {
                       async: false
                       hasHoistedVars: false
                       params: Array []
-                      predicate: undefined
                       rest: undefined
                       returnType: undefined
                       thisType: undefined
