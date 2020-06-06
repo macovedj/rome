@@ -18,8 +18,8 @@
 
   ℹ Recommended fix
 
-  - delete·arr[0][2]
-  + arr[0][2]·=·undefined
+  - delete arr[0][2]
+  + arr[0][2] = undefined
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -49,8 +49,8 @@ arr[0][2] = undefined;
 
   ℹ Recommended fix
 
-  - delete·obj.a.b.c
-  + obj.a.b.c·=·undefined
+  - delete obj.a.b.c
+  + obj.a.b.c = undefined
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -63,5 +63,20 @@ arr[0][2] = undefined;
 ```
 const obj = {a: {b: {c: 123}}};
 obj.a.b.c = undefined;
+
+```
+
+### `2`
+
+```
+✔ No known problems!
+
+```
+
+### `2: formatted`
+
+```
+const foo = new Set([1, 2, 3]);
+foo.delete(1);
 
 ```

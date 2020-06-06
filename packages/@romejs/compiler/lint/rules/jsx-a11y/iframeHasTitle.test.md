@@ -111,7 +111,19 @@
 ### `4`
 
 ```
-✔ No known problems!
+
+ unknown:1 lint/jsx-a11y/iframeHasTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Provide a title attribute when using iframe elements.
+
+    <iframe title={``} />
+    ^^^^^^^^^^^^^^^^^^^^^
+
+  ℹ Screen readers rely on the title set on an iframe to describe the content being displayed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✖ Found 1 problem
 
 ```
 
@@ -151,7 +163,19 @@
 ### `6`
 
 ```
-✔ No known problems!
+
+ unknown:1 lint/jsx-a11y/iframeHasTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Provide a title attribute when using iframe elements.
+
+    <iframe title={false} />
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+  ℹ Screen readers rely on the title set on an iframe to describe the content being displayed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✖ Found 1 problem
 
 ```
 
@@ -165,7 +189,19 @@
 ### `7`
 
 ```
-✔ No known problems!
+
+ unknown:1 lint/jsx-a11y/iframeHasTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Provide a title attribute when using iframe elements.
+
+    <iframe title={true} />
+    ^^^^^^^^^^^^^^^^^^^^^^^
+
+  ℹ Screen readers rely on the title set on an iframe to describe the content being displayed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✖ Found 1 problem
 
 ```
 
@@ -179,7 +215,19 @@
 ### `8`
 
 ```
-✔ No known problems!
+
+ unknown:1 lint/jsx-a11y/iframeHasTitle ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✖ Provide a title attribute when using iframe elements.
+
+    <iframe title={42} />
+    ^^^^^^^^^^^^^^^^^^^^^
+
+  ℹ Screen readers rely on the title set on an iframe to describe the content being displayed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✖ Found 1 problem
 
 ```
 
